@@ -1,0 +1,12 @@
+{% extends '../base.html' %}
+{% load static %}
+{% block body %}
+
+<main>
+  <div class="mt-10">
+    <h1>Home</h1>
+    <p>Hello {{ request.user }}</p>
+    <button class="my-6 btn btn-primary"><a href="{% url 'sign_out' %}">Sign Out</a></button>
+  </div>
+</main>
+{% endblock body %}

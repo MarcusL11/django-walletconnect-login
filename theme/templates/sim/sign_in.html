@@ -1,0 +1,77 @@
+{% extends '../base.html' %}
+{% load static %}
+{% block body %}
+<main>
+
+  <script>
+  const PROJECT_ID = "{{ project_id }}";
+  </script>  
+
+  <div class="mt-10 mb-4">
+    <div class="text-sm">
+      <div class="mb-6 card w-container shadow-2xl bg-base-100 rounded-3xl duration-500 hover:shadow-xl">
+        <div class="card-body">                
+          <div class="text-center">
+            <h1 class="">WalletConnect</h1>
+          </div>
+          <!-- Connect Wallet Section and Button Start -->
+          <div class="flex flex-col justify-center text-center">
+            <h2>Step 1: Connect with Chia Wallet</h2> 
+            <p>Copy link and paste into your Chia wallet to make a connection</p> 
+            <div class="justify-center mt-4">
+              <button id="connect-button" class="btn btn-primary">Connect Wallet</button>
+            </div>
+          </div>
+          <!-- Connect Wallet Section and Button End -->
+
+          <!-- Success Message Component Start -->
+          <div role="alert" id="connect-success-component" class="alert alert-success hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            <span>
+              <!--Success Message provided by walletconnect.js -->
+            </span>
+          </div>
+          <!-- Success Message Component End -->
+
+          <!-- Sign Message Section Start -->
+          <div class="flex flex-col justify-center text-center">
+            <h2>Step 2: Verify DID</h2>
+            <p>A message will be sent to your wallet to verify</p>
+            <div class="justify-center mt-4">
+              <form action="{% url 'sign_in' %}">
+                {% csrf_token %}
+                <input  id="did-input" type="text" placeholder="did:chia:..." class="input input-bordered w-full max-w-xs" />
+                <button id="sign-message-button" class="btn btn-primary mx-2" >Sign message by ID</button>
+              </form>
+            </div>
+          </div>
+         
+          <!-- Sign Message Section End -->
+          
+          <!-- Error Message Component Start -->
+          <div role="alert" id="error-component" class="alert alert-error hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            <span>
+              <!--Error message provided by walletconnect.js -->
+            </span>
+          </div>
+          <!-- Error Message Component End -->
+          
+          <!-- Success Message Component Start -->
+          <div role="alert" id="success-component" class="alert alert-success hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            <span>
+              <!--Success Message provided by walletconnect.js -->
+            </span>
+          </div>
+          <!-- Success Message Component End -->
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}
+
+{% block js %}
+  <script src={% static "js/walletconnect.js" %} type="module"></script>
+{% endblock js %}
